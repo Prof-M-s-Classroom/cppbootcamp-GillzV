@@ -10,14 +10,20 @@ private:
     int batteryLife;
 
 public:
-    // Constructor
 
+
+    // Constructor
+    Robot(string n, string m, int bl) : name(n), model(m), batteryLife(bl) {}
 
     // Getter Methods
-
+    string getName() {return name;}
+    string getModel() {return model;}
+    int getBatteryLife() {return batteryLife;}
 
     // Setter Methods
-
+    void setName(string n) {name = n;}
+    void setModel(string m) {model = m;}
+    void setBatteryLife(int b) {batteryLife = b;}
 
     // Display function
     void displayRobot() {
@@ -26,10 +32,15 @@ public:
 };
 
 // Step 2: Function to modify robot (pass by value)
-
-
+void modifyRobotbyvalue(Robot r) {
+  r.setBatteryLife(50);
+  cout << "Modify Robot Battery Life by value." << endl;
+}
 // Step 3: Function to modify robot (pass by reference)
-
+void modifyRobotbyReference (Robot& r) {
+  r.setBatteryLife(50);
+  cout << "Modify Robot Battery Life by reference." << endl;
+}
 
 // Step 4: Template class for a Fleet that stores multiple robots
 template <typename T>
@@ -73,20 +84,20 @@ public:
 
 int main() {
     // Step 5: Create a Robot object
-
-
+    Robot robot1("Robot1", "Model4", 50);
 
     // Step 6: Use pointers to access Robot object
+    Robot* ptr = &robot1;
 
-   // cout << "Updated Battery Life (using pointer): " << robotPtr->getBatteryLife() << "%\n";
+    cout << "Updated Battery Life (using pointer): " << ptr->getBatteryLife() << "%\n";
 
     // Step 7: Pass by value (no change outside function)
-
-   // cout << "After modifyRobotByValue, Battery Life: " << myRobot.getBatteryLife() << "%\n";
+    modifyRobotbyvalue(robot1);
+    cout << "After modifyRobotByValue, Battery Life: " << robot1.getBatteryLife() << "%\n";
 
     // Step 8: Pass by reference (changes persist)
-
-   // cout << "After modifyRobotByReference, Battery Life: " << myRobot.getBatteryLife() << "%\n";
+    modifyRobotbyReference(robot1);
+    cout << "After modifyRobotByReference, Battery Life: " << robot1.getBatteryLife() << "%\n";
 
     // Step 9: Use the Fleet template class
     Fleet<string> myFleet(3);
@@ -98,3 +109,4 @@ int main() {
 
     return 0;
 }
+
